@@ -8,18 +8,6 @@ public class SOQLCSVController {
     public static String fileName {get; set;}
     public static Case tempCase {get; set;}
     
-    public SOQLCSVController() {
-        tempCase = new Case();
-    }
-
-    public void sendCSVEmail() {
-        
-        blobCSV = Blob.valueOf(utility.generateCSV(queryString, columnHeadings));
-        utility.sendEmail(blobCSV, tempCase.ContactId, queryString);
-        
-    }
-   
-    
     public pageReference downloadCSV() {
         
         String sObjectName = queryString.substringAfter('FROM ');
