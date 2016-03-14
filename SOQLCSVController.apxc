@@ -1,0 +1,36 @@
+public class SOQLCSVController {
+    
+    public static SOQLCSVUtility utility = new SOQLCSVUtility();
+    public static String queryString {get; set;}
+    public static String columnHeadings {get; set;}
+    public static Blob blobCSV {get; set;}
+    public static String stringCSV {get; set;}
+    public static String fileName {get; set;}
+    public static Case tempCase {get; set;}
+    
+    public SOQLCSVController() {
+        tempCase = new Case();
+    }
+
+    public void sendCSVEmail() {
+        
+        blobCSV = Blob.valueOf(utility.generateCSV(queryString, columnHeadings));
+        utility.sendEmail(blobCSV, tempCase.ContactId, queryString);
+        
+    }
+   
+    
+    public pageReference downloadCSV() {
+        
+        String sObjectName = queryString.substringAfter('FROM ');
+        sObjectName = sObjectName.substringBefore(' WHERE');
+        
+        fileName = sObjectName + '_report_' + String.valueOf(date.today().day()) + String.valueOf(date.today().month()) + String.valueOf(date.today().year());
+        
+        stringCSV = utility.generateCSV(queryString, columnHeadings);
+        
+        return new pageReference('/apex/SOQLCSVDownload');
+        
+    }
+    
+}
