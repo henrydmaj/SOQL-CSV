@@ -29,36 +29,4 @@ public class SOQLCSVUtility {
         return csvReport;
     }
     
-     public void sendEmail(Blob resultCSV, String contactId, String queryString) {
-         
-        String sObjectName = queryString.substringAfter('FROM ');
-        sObjectName = sObjectName.substringBefore(' WHERE');
-                
-        //send email code
-        Messaging.reserveSingleEmailCapacity(1);
-        List<Messaging.EmailFileAttachment> atts = new List<Messaging.EmailFileAttachment>();
-        Messaging.EmailFileAttachment att = new Messaging.EmailFileAttachment();
-        
-        //attachment
-        att.setBody(resultCSV);
-        att.setContentType('text/csv');
-        att.setFileName('report.csv');
-        att.setInline(false);
-        atts.add(att);
-        
-        //email msg
-        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        mail.setsaveAsActivity(false);
-        mail.setUseSignature(false);
-        mail.setTargetObjectId(contactId);
-        mail.setPlainTextBody('Attached is a report on ' + sobjectName);
-        mail.setHTMLBody('Attached is a report on ' + sobjectName + '<br />' + 
-                         'with critera ' + queryString);
-        mail.setFileAttachments(atts);
-        
-        // send the email
-        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
-        
-    }
-
 }
