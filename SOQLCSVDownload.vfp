@@ -1,0 +1,5 @@
+<apex:page controller="SOQLCSVController" contentType="application/csv#{!fileName}.csv" cache="true" showheader="fase">
+
+    <apex:outputText value="{!stringCSV}" />
+    
+</apex:page>
