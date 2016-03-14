@@ -14,13 +14,11 @@
             <br />
             
             <apex:pageBlockSection title="Query to CSV">
-                <apex:inputField value="{!tempCase.contactId}" label="Contact"/>
                 <apex:inputTextArea value="{!queryString}" label="Query String"/>
                 <apex:inputTextArea value="{!columnHeadings}" label="Column Headings"/>
             </apex:pageBlockSection>
             
             <apex:pageBlockButtons >
-                <apex:commandButton action="{!sendCSVEmail}" value="Send"></apex:commandButton>
                 <apex:commandButton action="{!downloadCSV}" value="Download"></apex:commandButton>
             </apex:pageBlockButtons>
             
