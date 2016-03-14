@@ -1,0 +1,29 @@
+<apex:page controller="SOQLCSVController" tabStyle="Report">
+    <apex:form >
+        <apex:pageBlock >
+            
+            <br />
+            <strong>SOQL Query to CSV tool</strong>
+            <br />
+            Please enter the query with no spaces between field names, and the column headings, seperated by commas
+            <br />
+            with no spaces between the commas. If you wish to email the results, enter a Contact ID.
+            <br />
+            If column heading field is blank, the field names will be used.
+            <br />
+            <br />
+            
+            <apex:pageBlockSection title="Query to CSV">
+                <apex:inputField value="{!tempCase.contactId}" label="Contact"/>
+                <apex:inputTextArea value="{!queryString}" label="Query String"/>
+                <apex:inputTextArea value="{!columnHeadings}" label="Column Headings"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!sendCSVEmail}" value="Send"></apex:commandButton>
+                <apex:commandButton action="{!downloadCSV}" value="Download"></apex:commandButton>
+            </apex:pageBlockButtons>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
